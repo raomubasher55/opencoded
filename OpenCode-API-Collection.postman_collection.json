@@ -1,0 +1,2439 @@
+{
+  "info": {
+    "_postman_id": "e1a4f51c-d8d9-4e82-9c84-d5f1a2d83b94",
+    "name": "OpenCode API Collection",
+    "description": "Complete collection of OpenCode microservices API endpoints for testing Phase 3 features, including multi-language code execution, real-time communication, advanced AI code analysis, and enterprise features.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "API Gateway",
+      "item": [
+        {
+          "name": "Gateway Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Check if the API Gateway is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth Service",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Register a new user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login and receive JWT tokens"
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/refresh-token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "refresh-token"
+              ]
+            },
+            "description": "Refresh an expired access token"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate API Key",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/users/{{userId}}/api-keys",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "users",
+                "{{userId}}",
+                "api-keys"
+              ]
+            },
+            "description": "Generate a new API key for a user"
+          },
+          "response": []
+        },
+        {
+          "name": "GitHub OAuth",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/github",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "github"
+              ]
+            },
+            "description": "Initiate GitHub OAuth flow"
+          },
+          "response": []
+        },
+        {
+          "name": "Google OAuth",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/google",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "google"
+              ]
+            },
+            "description": "Initiate Google OAuth flow"
+          },
+          "response": []
+        },
+        {
+          "name": "Auth Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "health"
+              ]
+            },
+            "description": "Check if the Auth Service is running"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/users/{{userId}}/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "users",
+                "{{userId}}",
+                "roles"
+              ]
+            },
+            "description": "Get the roles and permissions assigned to a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Role to User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/users/{{userId}}/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "users",
+                "{{userId}}",
+                "roles"
+              ]
+            },
+            "description": "Assign a role to a user (requires admin privileges)"
+          },
+          "response": []
+        },
+        {
+          "name": "List Available Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/plans",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "plans"
+              ]
+            },
+            "description": "List all available subscription plans"
+          },
+          "response": []
+        },
+        {
+          "name": "Subscribe to Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"planId\": \"plan_professional\",\n    \"paymentMethodId\": \"pm_card_visa\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/users/{{userId}}/subscriptions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "users",
+                "{{userId}}",
+                "subscriptions"
+              ]
+            },
+            "description": "Subscribe a user to a specific plan"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Subscription",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/users/{{userId}}/subscriptions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "users",
+                "{{userId}}",
+                "subscriptions"
+              ]
+            },
+            "description": "Get the current subscription for a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Team",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Engineering Team\",\n    \"description\": \"Our core engineering team\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/teams",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "teams"
+              ]
+            },
+            "description": "Create a new team"
+          },
+          "response": []
+        },
+        {
+          "name": "Add User to Team",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"{{userId}}\",\n    \"role\": \"member\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/teams/{{teamId}}/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "teams",
+                "{{teamId}}",
+                "members"
+              ]
+            },
+            "description": "Add a user to a team"
+          },
+          "response": []
+        },
+        {
+          "name": "List Team Members",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/teams/{{teamId}}/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "teams",
+                "{{teamId}}",
+                "members"
+              ]
+            },
+            "description": "List all members of a team"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "File Service",
+      "item": [
+        {
+          "name": "List Files",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/files?path=/tmp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files"
+              ],
+              "query": [
+                {
+                  "key": "path",
+                  "value": "/tmp"
+                }
+              ]
+            },
+            "description": "List files and directories"
+          },
+          "response": []
+        },
+        {
+          "name": "Read File",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/files/read?path=/etc/hosts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files",
+                "read"
+              ],
+              "query": [
+                {
+                  "key": "path",
+                  "value": "/etc/hosts"
+                }
+              ]
+            },
+            "description": "Read file contents"
+          },
+          "response": []
+        },
+        {
+          "name": "Write File",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"path\": \"/tmp/test-file.txt\",\n    \"content\": \"This is a test file created with the OpenCode API.\",\n    \"createDirectory\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/files/write",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files",
+                "write"
+              ]
+            },
+            "description": "Write content to a file"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Directory",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"path\": \"/tmp/test-directory\",\n    \"recursive\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/files/directory",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files",
+                "directory"
+              ]
+            },
+            "description": "Create a new directory"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/files?path=/tmp/test-file.txt",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files"
+              ],
+              "query": [
+                {
+                  "key": "path",
+                  "value": "/tmp/test-file.txt"
+                }
+              ]
+            },
+            "description": "Delete a file"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Directory",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/files?path=/tmp/test-directory&recursive=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files"
+              ],
+              "query": [
+                {
+                  "key": "path",
+                  "value": "/tmp/test-directory"
+                },
+                {
+                  "key": "recursive",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Delete a directory"
+          },
+          "response": []
+        },
+        {
+          "name": "Watch File",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/watch?path=/tmp&recursive=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "watch"
+              ],
+              "query": [
+                {
+                  "key": "path",
+                  "value": "/tmp"
+                },
+                {
+                  "key": "recursive",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Watch a file or directory for changes"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Files",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/search?query=test&path=/tmp&includeContent=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "test"
+                },
+                {
+                  "key": "path",
+                  "value": "/tmp"
+                },
+                {
+                  "key": "includeContent",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Search for files matching a pattern"
+          },
+          "response": []
+        },
+        {
+          "name": "Files Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/files/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "files",
+                "health"
+              ]
+            },
+            "description": "Check if the File Service is running"
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"function\",\n  \"path\": \"/tmp\",\n  \"options\": {\n    \"includeContent\": true,\n    \"maxResults\": 50,\n    \"fileTypes\": [\".js\", \".ts\"],\n    \"excludePatterns\": [\"node_modules\", \"dist\"],\n    \"caseSensitive\": false,\n    \"useRegex\": true,\n    \"contextLines\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/search/advanced",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "search",
+                "advanced"
+              ]
+            },
+            "description": "Perform advanced search with filters and pattern matching"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Workspace",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Project\",\n  \"basePath\": \"/tmp/my-project\",\n  \"settings\": {\n    \"ignoredPatterns\": [\"node_modules\", \"dist\", \".git\"],\n    \"language\": \"typescript\",\n    \"fileTypes\": [\".ts\", \".tsx\", \".js\", \".jsx\", \".json\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/workspace",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "workspace"
+              ]
+            },
+            "description": "Create a new workspace"
+          },
+          "response": []
+        },
+        {
+          "name": "List Workspaces",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/workspace",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "workspace"
+              ]
+            },
+            "description": "Get all workspaces for the current user"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workspace Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/workspace/{{workspaceId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "workspace",
+                "{{workspaceId}}"
+              ]
+            },
+            "description": "Get details of a specific workspace"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Workspace",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Project Name\",\n  \"settings\": {\n    \"ignoredPatterns\": [\"node_modules\", \"dist\", \".git\", \"coverage\"],\n    \"language\": \"typescript\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/workspace/{{workspaceId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "workspace",
+                "{{workspaceId}}"
+              ]
+            },
+            "description": "Update a workspace"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Workspace",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/workspace/{{workspaceId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "workspace",
+                "{{workspaceId}}"
+              ]
+            },
+            "description": "Delete a workspace"
+          },
+          "response": []
+        },
+        {
+          "name": "Real-Time File Sync (WebSocket)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "ws://localhost:8080/api/watch/sync?token={{accessToken}}&path=/tmp",
+              "protocol": "ws",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "watch",
+                "sync"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}"
+                },
+                {
+                  "key": "path",
+                  "value": "/tmp"
+                }
+              ]
+            },
+            "description": "Establish a WebSocket connection for real-time file synchronization"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LLM Service",
+      "item": [
+        {
+          "name": "List Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/llm/providers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "providers"
+              ]
+            },
+            "description": "List available LLM providers"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Configuration",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/llm/config",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "config"
+              ]
+            },
+            "description": "Get current provider configuration"
+          },
+          "response": []
+        },
+        {
+          "name": "Set Configuration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"provider\": \"openai\",\n    \"model\": \"gpt-3.5-turbo\",\n    \"config\": {\n        \"temperature\": 0.7,\n        \"maxTokens\": 1024\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/config",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "config"
+              ]
+            },
+            "description": "Set the active LLM provider configuration"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Models",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/llm/models",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "models"
+              ]
+            },
+            "description": "Get available models for the current provider"
+          },
+          "response": []
+        },
+        {
+          "name": "Text Completion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"prompt\": \"Write a function that calculates the fibonacci sequence\",\n    \"provider\": \"openai\",\n    \"model\": \"gpt-3.5-turbo\",\n    \"temperature\": 0.7,\n    \"maxTokens\": 1024\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/completions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "completions"
+              ]
+            },
+            "description": "Generate a text completion"
+          },
+          "response": []
+        },
+        {
+          "name": "Streaming Completion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"prompt\": \"Write a function that calculates the fibonacci sequence\",\n    \"provider\": \"openai\",\n    \"model\": \"gpt-3.5-turbo\",\n    \"temperature\": 0.7,\n    \"maxTokens\": 1024\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/completions/stream",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "completions",
+                "stream"
+              ]
+            },
+            "description": "Generate a streaming text completion"
+          },
+          "response": []
+        },
+        {
+          "name": "Count Tokens",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"This is a sample text to count tokens for.\",\n    \"provider\": \"openai\",\n    \"model\": \"gpt-3.5-turbo\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/tokens/count",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "tokens",
+                "count"
+              ]
+            },
+            "description": "Count tokens for a piece of text"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Templates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/llm/templates",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "templates"
+              ]
+            },
+            "description": "Get all available templates"
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"function calculateSum(a, b) {\\n  return a + b;\\n}\",\n  \"language\": \"javascript\",\n  \"analysisType\": \"documentation\",\n  \"provider\": \"anthropic\",\n  \"model\": \"claude-3-opus\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/code/analyze",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "code",
+                "analyze"
+              ]
+            },
+            "description": "Analyze code to provide insights, suggestions, and documentation"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Tests",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"function calculateSum(a, b) {\\n  return a + b;\\n}\",\n  \"language\": \"javascript\",\n  \"testFramework\": \"jest\",\n  \"provider\": \"anthropic\",\n  \"model\": \"claude-3-opus\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/code/tests",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "code",
+                "tests"
+              ]
+            },
+            "description": "Generate unit tests for provided code"
+          },
+          "response": []
+        },
+        {
+          "name": "Refactor Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"function calc(x, y) {\\n  var res = x + y;\\n  return res;\\n}\",\n  \"language\": \"javascript\",\n  \"refactorType\": \"modernize\",\n  \"provider\": \"openai\",\n  \"model\": \"gpt-4\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/code/refactor",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "code",
+                "refactor"
+              ]
+            },
+            "description": "Refactor code to improve its quality, readability, or performance"
+          },
+          "response": []
+        },
+        {
+          "name": "Stream Chat Completion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a helpful assistant.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a function to calculate the factorial of a number.\"\n    }\n  ],\n  \"provider\": \"anthropic\",\n  \"model\": \"claude-3-sonnet\",\n  \"temperature\": 0.7,\n  \"maxTokens\": 1024\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/llm/chat/stream",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "chat",
+                "stream"
+              ]
+            },
+            "description": "Generate a chat completion with streaming response"
+          },
+          "response": []
+        },
+        {
+          "name": "LLM Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/llm/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "llm",
+                "health"
+              ]
+            },
+            "description": "Check if the LLM Service is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Session Service",
+      "item": [
+        {
+          "name": "Create Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"{{userId}}\",\n    \"title\": \"Test Session\",\n    \"metadata\": {\n        \"project\": \"test-project\",\n        \"tags\": [\"test\", \"api\"]\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sessions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions"
+              ]
+            },
+            "description": "Create a new session"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Session",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}"
+              ]
+            },
+            "description": "Get session details"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Session",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated Session Title\",\n    \"metadata\": {\n        \"status\": \"completed\",\n        \"tags\": [\"test\", \"api\", \"updated\"]\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}"
+              ]
+            },
+            "description": "Update session details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Session",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}"
+              ]
+            },
+            "description": "Delete a session"
+          },
+          "response": []
+        },
+        {
+          "name": "List Sessions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions?userId={{userId}}&limit=20&skip=0",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "skip",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "List all sessions for a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Message to Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role\": \"user\",\n    \"content\": \"Hello, this is a test message\",\n    \"metadata\": {\n        \"timestamp\": \"2025-06-17T20:43:22.123Z\"\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/messages",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "messages"
+              ]
+            },
+            "description": "Add a message to a session"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Messages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/messages?limit=50",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "messages"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Get all messages from a session"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Message",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/messages/{{messageId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "messages",
+                "{{messageId}}"
+              ]
+            },
+            "description": "Delete a message from a session"
+          },
+          "response": []
+        },
+        {
+          "name": "Real-Time Session Updates (WebSocket)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "ws://localhost:8080/api/sessions/live/{{sessionId}}?token={{accessToken}}",
+              "protocol": "ws",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "live",
+                "{{sessionId}}"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}"
+                }
+              ]
+            },
+            "description": "Connect to a WebSocket to receive real-time session updates"
+          },
+          "response": []
+        },
+        {
+          "name": "Share Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetUserId\": \"{{targetUserId}}\",\n  \"permissions\": [\"read\", \"write\"],\n  \"expiresAt\": \"2025-07-17T20:43:22.123Z\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/share",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "share"
+              ]
+            },
+            "description": "Share a session with another user"
+          },
+          "response": []
+        },
+        {
+          "name": "List Shared Sessions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/shared",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "shared"
+              ]
+            },
+            "description": "List all sessions shared with the current user"
+          },
+          "response": []
+        },
+        {
+          "name": "Revoke Session Share",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/share/{{shareId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "share",
+                "{{shareId}}"
+              ]
+            },
+            "description": "Revoke access to a shared session"
+          },
+          "response": []
+        },
+        {
+          "name": "Add File Context to Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"file\",\n  \"data\": {\n    \"path\": \"/tmp/app.py\",\n    \"lineStart\": 24,\n    \"lineEnd\": 30,\n    \"content\": \"def process_item(items, index):\\n    # Process the item at the given index\\n    return items[index]\\n\\n# Usage\\nresult = process_item(my_list, 10)\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/{{sessionId}}/messages/{{messageId}}/context",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "{{sessionId}}",
+                "messages",
+                "{{messageId}}",
+                "context"
+              ]
+            },
+            "description": "Add a file context reference to a message"
+          },
+          "response": []
+        },
+        {
+          "name": "Sessions Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/sessions/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "sessions",
+                "health"
+              ]
+            },
+            "description": "Check if the Session Service is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tools Service",
+      "item": [
+        {
+          "name": "List Tools",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tools",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tools"
+              ]
+            },
+            "description": "List available development tools"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tool Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/tools/{{toolId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tools",
+                "{{toolId}}"
+              ]
+            },
+            "description": "Get detailed information about a specific tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Execute Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"language\": \"javascript\",\n    \"code\": \"console.log('Hello, world!'); const x = 10; const y = 20; console.log(x + y);\",\n    \"timeout\": 5000,\n    \"environment\": {\n        \"NODE_ENV\": \"development\"\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/executions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions"
+              ]
+            },
+            "description": "Execute code in a sandboxed environment"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Execution Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/executions/{{executionId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions",
+                "{{executionId}}"
+              ]
+            },
+            "description": "Get the status of a code execution"
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"language\": \"javascript\",\n    \"code\": \"function factorial(n) { if (n <= 1) return 1; return n * factorial(n - 1); }\",\n    \"analysisTypes\": [\"complexity\", \"security\", \"performance\"],\n    \"detailed\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/analysis",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "analysis"
+              ]
+            },
+            "description": "Analyze code for issues, complexity, and recommendations"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Analysis Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/analysis/{{analysisId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "analysis",
+                "{{analysisId}}"
+              ]
+            },
+            "description": "Get detailed results of a previous code analysis"
+          },
+          "response": []
+        },
+        {
+          "name": "Apply Tool",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"language\": \"javascript\",\n    \"code\": \"function add(a,b){return a+b}\",\n    \"config\": {\n        \"fix\": true,\n        \"tabWidth\": 2\n    }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/tools/{{toolId}}/apply",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tools",
+                "{{toolId}}",
+                "apply"
+              ]
+            },
+            "description": "Apply a specific development tool to code"
+          },
+          "response": []
+        },
+        {
+          "name": "Execute Code with Dependencies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"javascript\",\n  \"code\": \"const _ = require('lodash'); console.log(_.camelCase('Hello World'));\",\n  \"dependencies\": [\n    {\n      \"name\": \"lodash\",\n      \"version\": \"4.17.21\"\n    }\n  ],\n  \"timeout\": 10000,\n  \"environment\": {\n    \"NODE_ENV\": \"development\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/executions/with-deps",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions",
+                "with-deps"
+              ]
+            },
+            "description": "Execute code with specified dependencies in a sandboxed environment"
+          },
+          "response": []
+        },
+        {
+          "name": "Stream Execution",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"python\",\n  \"code\": \"import time\\nfor i in range(5):\\n    print(f'Count: {i}')\\n    time.sleep(1)\",\n  \"timeout\": 10000\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/executions/stream",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions",
+                "stream"
+              ]
+            },
+            "description": "Execute code and stream the output in real-time"
+          },
+          "response": []
+        },
+        {
+          "name": "Execute in Container",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"python\",\n  \"code\": \"import numpy as np\\narray = np.array([1, 2, 3, 4, 5])\\nprint(f'Mean: {np.mean(array)}')\",\n  \"timeout\": 15000,\n  \"container\": {\n    \"image\": \"python:3.9-slim\",\n    \"dependencies\": [\"numpy==1.23.0\"],\n    \"setup\": \"pip install numpy==1.23.0\",\n    \"memoryLimit\": \"512m\",\n    \"cpuLimit\": \"1.0\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/executions/container",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions",
+                "container"
+              ]
+            },
+            "description": "Execute code in an isolated Docker container with custom runtime environments"
+          },
+          "response": []
+        },
+        {
+          "name": "Enhanced Code Analysis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"javascript\",\n  \"code\": \"function processData(data) {\\n  let results = [];\\n  for (let i = 0; i < data.length; i++) {\\n    if (data[i].active) {\\n      for (let j = 0; j < data[i].items.length; j++) {\\n        results.push(data[i].items[j].value * 2);\\n      }\\n    }\\n  }\\n  return results;\\n}\",\n  \"analysisTypes\": [\"complexity\", \"performance\", \"bestPractices\", \"documentation\", \"style\", \"dependencies\"],\n  \"detailed\": true,\n  \"includeSuggestions\": true,\n  \"includeExamples\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/analysis/enhanced",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "analysis",
+                "enhanced"
+              ]
+            },
+            "description": "Analyze code with enhanced capabilities including metrics, best practices, and documentation"
+          },
+          "response": []
+        },
+        {
+          "name": "Execute Multi-Language Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"python\",\n  \"code\": \"def fibonacci(n):\\n    if n <= 1:\\n        return n\\n    return fibonacci(n-1) + fibonacci(n-2)\\n\\nfor i in range(10):\\n    print(fibonacci(i))\",\n  \"timeout\": 5000,\n  \"executionMode\": \"synchronous\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/executions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "executions"
+              ]
+            },
+            "description": "Execute code in Python (Phase 3 multi-language support)"
+          },
+          "response": []
+        },
+        {
+          "name": "Tools Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tools/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "tools",
+                "health"
+              ]
+            },
+            "description": "Check if the Tools Service is running"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "",
+          "// Automatically save tokens",
+          "if (pm.response.code === 200 || pm.response.code === 201) {",
+          "    try {",
+          "        const jsonData = pm.response.json();",
+          "        ",
+          "        // Save auth tokens",
+          "        if (jsonData.accessToken) {",
+          "            pm.environment.set(\"accessToken\", jsonData.accessToken);",
+          "            console.log(\"Access token saved to environment\");",
+          "        }",
+          "        if (jsonData.refreshToken) {",
+          "            pm.environment.set(\"refreshToken\", jsonData.refreshToken);",
+          "            console.log(\"Refresh token saved to environment\");",
+          "        }",
+          "        ",
+          "        // Save user ID",
+          "        if (jsonData.user && jsonData.user.id) {",
+          "            pm.environment.set(\"userId\", jsonData.user.id);",
+          "            console.log(\"User ID saved to environment\");",
+          "        } else if (jsonData.id && pm.request.url.path.includes('register')) {",
+          "            pm.environment.set(\"userId\", jsonData.id);",
+          "            console.log(\"User ID saved from registration to environment\");",
+          "        }",
+          "        ",
+          "        // Save session ID",
+          "        if (jsonData.id && pm.request.url.path.includes('sessions') && !pm.request.url.path.includes('messages')) {",
+          "            pm.environment.set(\"sessionId\", jsonData.id);",
+          "            console.log(\"Session ID saved to environment\");",
+          "        }",
+          "        ",
+          "        // Save message ID",
+          "        if (jsonData.id && pm.request.url.path.includes('messages')) {",
+          "            pm.environment.set(\"messageId\", jsonData.id);",
+          "            console.log(\"Message ID saved to environment\");",
+          "        }",
+          "        ",
+          "        // Save execution ID",
+          "        if (jsonData.executionId) {",
+          "            pm.environment.set(\"executionId\", jsonData.executionId);",
+          "            console.log(\"Execution ID saved to environment\");",
+          "        }",
+          "        ",
+          "        // Save analysis ID",
+          "        if (jsonData.analysisId) {",
+          "            pm.environment.set(\"analysisId\", jsonData.analysisId);",
+          "            console.log(\"Analysis ID saved to environment\");",
+          "        }",
+          "        ",
+          "        // Save tool ID",
+          "        if (pm.request.url.path.includes('tools') && jsonData.tools && jsonData.tools.length > 0) {",
+          "            pm.environment.set(\"toolId\", jsonData.tools[0].id);",
+          "            console.log(\"Tool ID saved to environment\");",
+          "        }",
+          "",
+          "        // Save team ID",
+          "        if (jsonData.id && pm.request.url.path.includes('teams') && !pm.request.url.path.includes('members')) {",
+          "            pm.environment.set(\"teamId\", jsonData.id);",
+          "            console.log(\"Team ID saved to environment\");",
+          "        }",
+          "",
+          "        // Save share ID",
+          "        if (jsonData.shareId) {",
+          "            pm.environment.set(\"shareId\", jsonData.shareId);",
+          "            console.log(\"Share ID saved to environment\");",
+          "        }",
+          "",
+          "        // Save workspace ID",
+          "        if (jsonData.id && pm.request.url.path.includes('workspace') && !pm.request.url.path.includes('members')) {",
+          "            pm.environment.set(\"workspaceId\", jsonData.id);",
+          "            console.log(\"Workspace ID saved to environment\");",
+          "        }",
+          "    } catch (error) {",
+          "        console.error(\"Error processing response:\", error);",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "targetUserId",
+      "value": ""
+    },
+    {
+      "key": "sessionId",
+      "value": ""
+    },
+    {
+      "key": "messageId",
+      "value": ""
+    },
+    {
+      "key": "shareId",
+      "value": ""
+    },
+    {
+      "key": "executionId",
+      "value": ""
+    },
+    {
+      "key": "analysisId",
+      "value": ""
+    },
+    {
+      "key": "toolId",
+      "value": ""
+    },
+    {
+      "key": "teamId",
+      "value": ""
+    },
+    {
+      "key": "workspaceId",
+      "value": ""
+    }
+  ]
+}

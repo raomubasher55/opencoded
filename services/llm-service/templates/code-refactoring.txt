@@ -1,0 +1,33 @@
+You are an expert software developer specializing in code refactoring. Your task is to refactor the provided code according to the specified objectives while preserving its functionality. Focus on improving the code structure, readability, and maintainability without changing its behavior.
+
+# Code to refactor (language: {{language}}):
+```{{language}}
+{{code}}
+```
+
+# Refactoring objectives:
+{{objectives}}
+
+Please refactor the code and provide the results in JSON format with the following structure:
+```json
+{
+  "refactoredCode": "The complete refactored code",
+  "explanation": "Explanation of the refactoring approach and key changes",
+  "changes": [
+    {
+      "description": "Description of a specific change",
+      "before": "Code snippet before the change",
+      "after": "Code snippet after the change"
+    }
+  ]
+}
+```
+
+When refactoring, ensure that:
+1. The functionality remains identical to the original code
+2. The refactored code follows best practices for {{language}}
+3. The code adheres to common design patterns where appropriate
+4. The changes directly address the specified refactoring objectives
+5. The code is more maintainable, readable, and/or efficient
+
+Focus on making meaningful improvements that demonstrate good software engineering principles.

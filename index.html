@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCode Platform - Complete User Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: -20px -20px 2rem -20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .nav h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h3 {
+            color: #555;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .section h4 {
+            color: #666;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .code-block .comment {
+            color: #68d391;
+        }
+
+        .code-block .string {
+            color: #fbb6ce;
+        }
+
+        .code-block .keyword {
+            color: #90cdf4;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+        }
+
+        .feature-card li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-card li:before {
+            content: "✅ ";
+            color: #48bb78;
+        }
+
+        .step-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e6f3ff;
+            border-color: #3182ce;
+            color: #2c5282;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border-color: #d69e2e;
+            color: #744210;
+        }
+
+        .alert-success {
+            background: #f0fff4;
+            border-color: #38a169;
+            color: #22543d;
+        }
+
+        .alert-danger {
+            background: #fed7d7;
+            border-color: #e53e3e;
+            color: #742a2a;
+        }
+
+        .api-endpoint {
+            background: #2d3748;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .method-get { background: #48bb78; }
+        .method-post { background: #4299e1; }
+        .method-put { background: #ed8936; }
+        .method-delete { background: #f56565; }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .provider-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .provider-card:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .provider-card h4 {
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2d3748;
+            color: white;
+            margin: 3rem -20px -20px -20px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer a {
+            color: #90cdf4;
+            text-decoration: none;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .response-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav ul {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 OpenCode Platform</h1>
+            <p>Agentic AI-Powered Collaborative Coding Platform - Complete User Guide</p>
+        </div>
+
+        <div class="nav">
+            <h3>📋 Quick Navigation</h3>
+            <ul>
+                <li><a href="#getting-started">🎯 Getting Started</a></li>
+                <li><a href="#installation">💻 Installation & Setup</a></li>
+                <li><a href="#features">🛠️ Core Features</a></li>
+                <li><a href="#file-service">📁 File Service</a></li>
+                <li><a href="#terminal">🖥️ Terminal</a></li>
+                <li><a href="#search">🔍 Search</a></li>
+                <li><a href="#ai-review">🤖 AI Code Review</a></li>
+                <li><a href="#collaboration">👥 Collaboration</a></li>
+                <li><a href="#analytics">📊 Analytics</a></li>
+                <li><a href="#api-docs">📖 API Documentation</a></li>
+                <li><a href="#cli">💻 CLI Usage</a></li>
+                <li><a href="#troubleshooting">🚨 Troubleshooting</a></li>
+            </ul>
+        </div>
+
+        <section id="getting-started" class="section">
+            <h2>🎯 Getting Started</h2>
+            
+            <h3>What is OpenCode?</h3>
+            <p>OpenCode is an <strong>Agentic AI-powered collaborative coding platform</strong> that provides:</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📁 File Management</h4>
+                    <ul>
+                        <li>Secure file operations</li>
+                        <li>Real-time file watching</li>
+                        <li>Binary file detection</li>
+                        <li>Path validation</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🖥️ Terminal Integration</h4>
+                    <ul>
+                        <li>Safe command execution</li>
+                        <li>Streaming output</li>
+                        <li>Security restrictions</li>
+                        <li>Working directory management</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🤖 AI Code Review</h4>
+                    <ul>
+                        <li>Multiple LLM providers</li>
+                        <li>Security analysis</li>
+                        <li>Performance optimization</li>
+                        <li>Best practices validation</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>👥 Real-time Collaboration</h4>
+                    <ul>
+                        <li>Live editing</li>
+                        <li>Conflict resolution</li>
+                        <li>Team chat</li>
+                        <li>Session sharing</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔍 Advanced Search</h4>
+                    <ul>
+                        <li>Content search with regex</li>
+                        <li>File name patterns</li>
+                        <li>Exclude filters</li>
+                        <li>Case sensitivity options</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📊 Team Analytics</h4>
+                    <ul>
+                        <li>Productivity insights</li>
+                        <li>Code quality metrics</li>
+                        <li>Collaboration tracking</li>
+                        <li>Performance trends</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Who Should Use This?</strong><br>
+                • Developers building projects collaboratively<br>
+                • Teams needing code review automation<br>
+                • Students learning to code with AI assistance<br>
+                • Organizations wanting secure cloud-based development
+            </div>
+        </section>
+
+        <section id="installation" class="section">
+            <h2>💻 Installation & Setup</h2>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li><strong>Node.js</strong> (v18 or higher)</li>
+                <li><strong>MongoDB</strong> (for data storage)</li>
+                <li><strong>Redis</strong> (for real-time features)</li>
+                <li><strong>Git</strong> (for version control)</li>
+            </ul>
+
+            <h3>Quick Start (5 minutes)</h3>
+            
+            <div class="step-container">
+                <h4><span class="step-number">1</span>Clone the Repository</h4>
+                <div class="code-block">git clone https://github.com/your-org/opencoded-main.git
+cd opencoded-main</div>
+            </div>
+
+            <div class="step-container">
+                <h4><span class="step-number">2</span>Install Dependencies</h4>
+                <div class="code-block">npm install</div>
+            </div>
+
+            <div class="step-container">
+                <h4><span class="step-number">3</span>Set Environment Variables</h4>
+                <p>Create <code>.env</code> file:</p>
+                <div class="code-block"># Database
+MONGODB_URI=mongodb://localhost:27017/opencode
+REDIS_URL=redis://localhost:6379
+
+# Authentication
+JWT_SECRET=your-secret-key
+
+# LLM Providers (choose one or more)
+OPENAI_API_KEY=sk-your-openai-key
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
+GOOGLE_API_KEY=your-google-api-key
+OPENROUTER_API_KEY=sk-or-your-openrouter-key
+
+# Default LLM Provider
+DEFAULT_LLM_PROVIDER=openrouter
+DEFAULT_LLM_MODEL=openai/gpt-4-turbo</div>
+            </div>
+
+            <div class="step-container">
+                <h4><span class="step-number">4</span>Start Services</h4>
+                <div class="code-block"># Start all services
+npm run dev
+
+# Or start individual services
+npm run start:api-gateway
+npm run start:auth
+npm run start:file-service
+npm run start:llm-service
+npm run start:collaboration</div>
+            </div>
+
+            <div class="step-container">
+                <h4><span class="step-number">5</span>Access the Platform</h4>
+                <ul>
+                    <li><strong>API Gateway:</strong> <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+                    <li><strong>Web Interface:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+                    <li><strong>File Service:</strong> <a href="http://localhost:4001" target="_blank">http://localhost:4001</a></li>
+                    <li><strong>LLM Service:</strong> <a href="http://localhost:4002" target="_blank">http://localhost:4002</a></li>
+                </ul>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Setup Complete!</strong> All services should now be running. You can access the platform through the API Gateway at port 8080.
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <h2>🛠️ Core Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>1. File Management</h4>
+                    <p>Comprehensive file operations with security:</p>
+                    <ul>
+                        <li>Read, write, delete operations</li>
+                        <li>Directory listing and creation</li>
+                        <li>Real-time file watching</li>
+                        <li>Secure path validation</li>
+                        <li>Binary file detection</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>2. Terminal Integration</h4>
+                    <p>Safe command execution environment:</p>
+                    <ul>
+                        <li>Execute development commands</li>
+                        <li>Streaming real-time output</li>
+                        <li>Security restrictions</li>
+                        <li>Working directory management</li>
+                        <li>Command timeout protection</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>3. Advanced Search</h4>
+                    <p>Powerful search capabilities:</p>
+                    <ul>
+                        <li>Regex content search</li>
+                        <li>File name pattern matching</li>
+                        <li>Case-sensitive options</li>
+                        <li>File type filtering</li>
+                        <li>Exclude patterns support</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>4. AI Code Review</h4>
+                    <p>Intelligent code analysis:</p>
+                    <ul>
+                        <li>Multiple LLM providers</li>
+                        <li>Security vulnerability detection</li>
+                        <li>Performance optimization</li>
+                        <li>Best practices validation</li>
+                        <li>Auto-fix suggestions</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>5. Real-time Collaboration</h4>
+                    <p>Live collaborative editing:</p>
+                    <ul>
+                        <li>Operational Transform algorithm</li>
+                        <li>Conflict resolution</li>
+                        <li>Team chat integration</li>
+                        <li>Session sharing</li>
+                        <li>Cursor tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>6. Team Analytics</h4>
+                    <p>Comprehensive insights:</p>
+                    <ul>
+                        <li>Team velocity tracking</li>
+                        <li>Code quality metrics</li>
+                        <li>Collaboration indices</li>
+                        <li>Performance trends</li>
+                        <li>Individual analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="file-service" class="section">
+            <h2>📁 Using the File Service</h2>
+            
+            <h3>Available Endpoints</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📄 File Operations</h4>
+                    <div class="api-endpoint method-post">POST /api/files/write</div>
+                    <div class="api-endpoint method-get">GET /api/files/read</div>
+                    <div class="api-endpoint method-get">GET /api/files</div>
+                    <div class="api-endpoint method-delete">DELETE /api/files</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔍 Search Operations</h4>
+                    <div class="api-endpoint method-get">GET /api/search/content</div>
+                    <div class="api-endpoint method-get">GET /api/search/files</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🖥️ Terminal Operations</h4>
+                    <div class="api-endpoint method-post">POST /api/terminal/execute</div>
+                    <div class="api-endpoint method-post">POST /api/terminal/stream</div>
+                    <div class="api-endpoint method-get">GET /api/terminal/info</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>👁️ File Watching</h4>
+                    <div class="api-endpoint method-get">GET /api/watch</div>
+                </div>
+            </div>
+
+            <h3>Interactive Demo</h3>
+            <div class="step-container">
+                <h4>Try the File Service API</h4>
+                <p>Test file operations directly from this page:</p>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="apiToken">API Token:</label><br>
+                    <input type="text" id="apiToken" placeholder="Enter your JWT token" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="filePath">File Path:</label><br>
+                    <input type="text" id="filePath" placeholder="/test/demo.txt" value="/test/demo.txt" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="fileContent">File Content:</label><br>
+                    <textarea id="fileContent" placeholder="Enter file content..." style="width: 100%; height: 100px; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">Hello from OpenCode Platform!
+This is a test file created through the web interface.</textarea>
+                </div>
+                
+                <button class="demo-button" onclick="createFile()">📝 Create File</button>
+                <button class="demo-button" onclick="readFile()">📖 Read File</button>
+                <button class="demo-button" onclick="listFiles()">📂 List Files</button>
+                <button class="demo-button" onclick="deleteFile()">🗑️ Delete File</button>
+                
+                <div id="apiResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Example Code</h3>
+            <h4>1. Create/Write a File</h4>
+            <div class="code-block">curl -X POST http://localhost:8080/api/files/write \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "path": "/project/src/app.js",
+    "content": "console.log(\"Hello World!\");",
+    "createDirectory": true
+  }'</div>
+
+            <h4>2. Read a File</h4>
+            <div class="code-block">curl -X GET "http://localhost:8080/api/files/read?path=/project/src/app.js" \
+  -H "Authorization: Bearer YOUR_TOKEN"</div>
+
+            <h4>3. List Directory Contents</h4>
+            <div class="code-block">curl -X GET "http://localhost:8080/api/files?path=/project/src" \
+  -H "Authorization: Bearer YOUR_TOKEN"</div>
+        </section>
+
+        <section id="terminal" class="section">
+            <h2>🖥️ Using the Terminal</h2>
+            
+            <h3>Security Features</h3>
+            <div class="alert alert-info">
+                <strong>🛡️ Security First:</strong> The terminal service implements multiple security layers to prevent malicious commands while allowing safe development operations.
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>✅ Allowed Commands</h4>
+                    <ul>
+                        <li>npm, yarn, pnpm</li>
+                        <li>node, python, pip</li>
+                        <li>git operations</li>
+                        <li>ls, pwd, echo, cat</li>
+                        <li>docker, kubectl</li>
+                        <li>grep, find, curl</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>❌ Blocked Commands</h4>
+                    <ul>
+                        <li>rm, del, format</li>
+                        <li>sudo, su, chmod</li>
+                        <li>shutdown, reboot</li>
+                        <li>mount, umount</li>
+                        <li>iptables, firewall</li>
+                        <li>systemctl, service</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Interactive Terminal Demo</h3>
+            <div class="step-container">
+                <h4>Execute Commands</h4>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="terminalCommand">Command:</label><br>
+                    <input type="text" id="terminalCommand" placeholder="npm --version" value="echo 'Hello from OpenCode Terminal!'" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="workingDir">Working Directory:</label><br>
+                    <input type="text" id="workingDir" placeholder="/project" value="/tmp" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <button class="demo-button" onclick="executeCommand()">▶️ Execute Command</button>
+                <button class="demo-button" onclick="streamCommand()">🔄 Stream Command</button>
+                <button class="demo-button" onclick="getTerminalInfo()">ℹ️ Get Terminal Info</button>
+                
+                <div id="terminalResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Common Use Cases</h3>
+            
+            <h4>1. Development Workflow</h4>
+            <div class="code-block"># Start development server
+POST /api/terminal/execute
+{
+  "command": "npm run dev",
+  "cwd": "/project",
+  "timeout": 60000
+}</div>
+
+            <h4>2. Package Management</h4>
+            <div class="code-block"># Install dependencies
+POST /api/terminal/execute
+{
+  "command": "npm install",
+  "cwd": "/project"
+}</div>
+
+            <h4>3. Git Operations</h4>
+            <div class="code-block"># Check git status
+POST /api/terminal/execute
+{
+  "command": "git status",
+  "cwd": "/project"
+}</div>
+        </section>
+
+        <section id="search" class="section">
+            <h2>🔍 Search Functionality</h2>
+            
+            <h3>Search Types</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📄 Content Search</h4>
+                    <p>Search for text patterns within files</p>
+                    <div class="api-endpoint method-get">GET /api/search/content/{pattern}/{path}</div>
+                    <ul>
+                        <li>Regular expressions supported</li>
+                        <li>Case sensitivity options</li>
+                        <li>File type filtering</li>
+                        <li>Exclude patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📁 File Name Search</h4>
+                    <p>Find files by name patterns</p>
+                    <div class="api-endpoint method-get">GET /api/search/files/{pattern}/{path}</div>
+                    <ul>
+                        <li>Glob pattern matching</li>
+                        <li>Directory depth control</li>
+                        <li>Result limiting</li>
+                        <li>Automatic exclusions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Interactive Search Demo</h3>
+            <div class="step-container">
+                <h4>Try Search Functionality</h4>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="searchPattern">Search Pattern:</label><br>
+                    <input type="text" id="searchPattern" placeholder="TODO" value="function" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="searchPath">Search Path:</label><br>
+                    <input type="text" id="searchPath" placeholder="./src" value="./services" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="includePattern">Include Pattern (optional):</label><br>
+                    <input type="text" id="includePattern" placeholder="*.js" value="*.ts,*.js" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <button class="demo-button" onclick="searchContent()">🔍 Search Content</button>
+                <button class="demo-button" onclick="searchFiles()">📁 Search Files</button>
+                
+                <div id="searchResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Search Examples</h3>
+            
+            <h4>1. Find TODO Comments</h4>
+            <div class="code-block">GET /api/search/content/TODO/./src?includePattern=*.js&caseSensitive=false</div>
+            
+            <h4>2. Find Function Definitions</h4>
+            <div class="code-block">GET /api/search/content/function%20\w+/./src?includePattern=*.js</div>
+            
+            <h4>3. Find Configuration Files</h4>
+            <div class="code-block">GET /api/search/files/config/./</div>
+        </section>
+
+        <section id="ai-review" class="section">
+            <h2>🤖 AI Code Review</h2>
+            
+            <h3>Supported LLM Providers</h3>
+            <div class="providers-grid">
+                <div class="provider-card">
+                    <h4>🧠 OpenAI</h4>
+                    <p>GPT-4, GPT-3.5-Turbo</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        Models: gpt-4-turbo, gpt-4, gpt-3.5-turbo
+                    </div>
+                </div>
+                
+                <div class="provider-card">
+                    <h4>🤖 Anthropic</h4>
+                    <p>Claude 3 Opus, Sonnet</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        Models: claude-3-opus, claude-3-sonnet
+                    </div>
+                </div>
+                
+                <div class="provider-card">
+                    <h4>🔍 Google</h4>
+                    <p>Gemini 1.5 Pro, Flash</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        Models: gemini-1.5-pro, gemini-1.5-flash
+                    </div>
+                </div>
+                
+                <div class="provider-card">
+                    <h4>🌐 OpenRouter</h4>
+                    <p>50+ Models Access</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        Access to multiple providers through one API
+                    </div>
+                </div>
+                
+                <div class="provider-card">
+                    <h4>☁️ AWS Bedrock</h4>
+                    <p>Enterprise Models</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        Models: claude-v2, titan, jurassic
+                    </div>
+                </div>
+            </div>
+
+            <h3>Setup LLM Provider</h3>
+            <div class="step-container">
+                <h4>Configure Your Preferred Provider</h4>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="llmProvider">Provider:</label><br>
+                    <select id="llmProvider" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="openrouter">OpenRouter (Recommended)</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="anthropic">Anthropic</option>
+                        <option value="google">Google</option>
+                        <option value="simulation">Simulation (Demo)</option>
+                    </select>
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="llmModel">Model:</label><br>
+                    <input type="text" id="llmModel" placeholder="openai/gpt-4-turbo" value="openai/gpt-4-turbo" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="llmApiKey">API Key:</label><br>
+                    <input type="password" id="llmApiKey" placeholder="sk-..." style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <button class="demo-button" onclick="configureLLM()">⚙️ Configure Provider</button>
+                <button class="demo-button" onclick="getProviders()">📋 Get Providers</button>
+                <button class="demo-button" onclick="getModels()">🔧 Get Models</button>
+                
+                <div id="llmResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Review Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔒 Security Analysis</h4>
+                    <ul>
+                        <li>Vulnerability detection</li>
+                        <li>Input validation checks</li>
+                        <li>Authentication issues</li>
+                        <li>Injection attack prevention</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>⚡ Performance Review</h4>
+                    <ul>
+                        <li>Algorithm optimization</li>
+                        <li>Memory usage analysis</li>
+                        <li>Database query efficiency</li>
+                        <li>Caching opportunities</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🛠️ Maintainability</h4>
+                    <ul>
+                        <li>Code structure analysis</li>
+                        <li>Documentation quality</li>
+                        <li>Naming conventions</li>
+                        <li>Code duplication detection</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>✅ Best Practices</h4>
+                    <ul>
+                        <li>Framework conventions</li>
+                        <li>Error handling patterns</li>
+                        <li>Testing recommendations</li>
+                        <li>Code style compliance</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="collaboration" class="section">
+            <h2>👥 Real-time Collaboration</h2>
+            
+            <h3>Collaboration Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>✏️ Live Editing</h4>
+                    <ul>
+                        <li>Real-time synchronization</li>
+                        <li>Operational Transform algorithm</li>
+                        <li>Conflict-free editing</li>
+                        <li>Cursor position tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>💬 Team Communication</h4>
+                    <ul>
+                        <li>In-session chat</li>
+                        <li>Code discussions</li>
+                        <li>Review requests</li>
+                        <li>Notification system</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔄 Session Management</h4>
+                    <ul>
+                        <li>Create/join sessions</li>
+                        <li>Permission controls</li>
+                        <li>Session sharing</li>
+                        <li>History tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔀 Conflict Resolution</h4>
+                    <ul>
+                        <li>Automatic merging</li>
+                        <li>Change prioritization</li>
+                        <li>Version tracking</li>
+                        <li>Rollback capabilities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>WebSocket Connection</h3>
+            <div class="code-block">// Connect to collaboration service
+const socket = io('http://localhost:8080/collaboration');
+
+// Join a session
+socket.emit('join-session', {
+  sessionId: 'session_123',
+  userId: 'user_456'
+});
+
+// Listen for real-time events
+socket.on('user-joined', (data) => {
+  console.log(`${data.user.username} joined`);
+});
+
+socket.on('file-changed', (data) => {
+  // Update file content in real-time
+  updateFileContent(data.file, data.content);
+});
+
+socket.on('cursor-position', (data) => {
+  // Show other users' cursors
+  updateCursorPosition(data.userId, data.line, data.column);
+});</div>
+        </section>
+
+        <section id="analytics" class="section">
+            <h2>📊 Team Analytics</h2>
+            
+            <h3>Available Metrics</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📈 Team Velocity</h4>
+                    <ul>
+                        <li>Sprint completion rates</li>
+                        <li>Story points delivery</li>
+                        <li>Task completion trends</li>
+                        <li>Velocity predictions</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🎯 Code Quality</h4>
+                    <ul>
+                        <li>Review scores</li>
+                        <li>Bug density metrics</li>
+                        <li>Test coverage</li>
+                        <li>Technical debt tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🤝 Collaboration Index</h4>
+                    <ul>
+                        <li>Review participation</li>
+                        <li>Knowledge sharing</li>
+                        <li>Pair programming time</li>
+                        <li>Communication frequency</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>👤 Individual Performance</h4>
+                    <ul>
+                        <li>Commit frequency</li>
+                        <li>Lines of code</li>
+                        <li>Review quality</li>
+                        <li>Learning progression</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Analytics API Examples</h3>
+            <div class="code-block"># Team velocity over time
+GET /api/analytics/team/velocity?teamId=team_123&period=30d
+
+# Code quality metrics
+GET /api/analytics/code-quality?projectId=proj_123
+
+# Individual performance
+GET /api/analytics/user/performance?userId=user_456&period=7d</div>
+        </section>
+
+        <section id="api-docs" class="section">
+            <h2>📖 API Documentation</h2>
+            
+            <h3>Authentication</h3>
+            <div class="step-container">
+                <h4>Get Your API Token</h4>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="loginEmail">Email:</label><br>
+                    <input type="email" id="loginEmail" placeholder="user@example.com" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <div style="margin: 1rem 0;">
+                    <label for="loginPassword">Password:</label><br>
+                    <input type="password" id="loginPassword" placeholder="your-password" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                
+                <button class="demo-button" onclick="registerUser()">👤 Register</button>
+                <button class="demo-button" onclick="loginUser()">🔑 Login</button>
+                <button class="demo-button" onclick="getUserProfile()">👤 Get Profile</button>
+                
+                <div id="authResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Base URLs</h3>
+            <ul>
+                <li><strong>API Gateway:</strong> http://localhost:8080</li>
+                <li><strong>File Service:</strong> http://localhost:4001</li>
+                <li><strong>LLM Service:</strong> http://localhost:4002</li>
+                <li><strong>Auth Service:</strong> http://localhost:4003</li>
+                <li><strong>Collaboration:</strong> http://localhost:4004</li>
+            </ul>
+
+            <h3>Common Headers</h3>
+            <div class="code-block">Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+Accept: application/json</div>
+
+            <h3>Response Format</h3>
+            <div class="code-block">{
+  "success": true,
+  "data": {
+    // Response data
+  },
+  "message": "Optional message",
+  "timestamp": "2024-01-01T12:00:00.000Z"
+}</div>
+        </section>
+
+        <section id="cli" class="section">
+            <h2>💻 CLI Usage</h2>
+            
+            <h3>Installation</h3>
+            <div class="code-block">npm install -g @opencode/cli
+opencode --version</div>
+
+            <h3>Configuration</h3>
+            <div class="code-block"># Set API endpoint
+opencode config set api-url http://localhost:8080
+
+# Login to get token
+opencode auth login
+
+# Verify authentication
+opencode auth whoami</div>
+
+            <h3>Common Commands</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📁 File Operations</h4>
+                    <div class="code-block" style="font-size: 0.8em;">opencode files upload ./src/app.js
+opencode files download /project/app.js
+opencode files list /project/src
+opencode files watch /project</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🖥️ Terminal Commands</h4>
+                    <div class="code-block" style="font-size: 0.8em;">opencode exec "npm install"
+opencode exec --stream "npm run dev"
+opencode exec --cwd /project "npm test"</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🤖 Code Review</h4>
+                    <div class="code-block" style="font-size: 0.8em;">opencode review request --branch feature
+opencode review file ./src/app.js
+opencode llm configure --provider openai</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>👥 Collaboration</h4>
+                    <div class="code-block" style="font-size: 0.8em;">opencode collab start "API Dev"
+opencode collab join session_123
+opencode collab share session_123 user@email</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="section">
+            <h2>🚨 Troubleshooting</h2>
+            
+            <h3>Health Check</h3>
+            <div class="step-container">
+                <h4>Check Service Status</h4>
+                <button class="demo-button" onclick="checkHealth()">🔍 Check All Services</button>
+                <div id="healthResponse" class="response-box" style="display: none;"></div>
+            </div>
+
+            <h3>Common Issues</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔐 Authentication Errors</h4>
+                    <ul>
+                        <li>Token expired - Login again</li>
+                        <li>Invalid credentials - Check email/password</li>
+                        <li>Missing token - Include Authorization header</li>
+                        <li>Wrong permissions - Check user role</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📁 File Access Issues</h4>
+                    <ul>
+                        <li>Path outside allowed directories</li>
+                        <li>File permissions denied</li>
+                        <li>Directory doesn't exist</li>
+                        <li>Binary file restrictions</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🖥️ Terminal Problems</h4>
+                    <ul>
+                        <li>Command blocked by security</li>
+                        <li>Working directory invalid</li>
+                        <li>Command timeout exceeded</li>
+                        <li>Invalid command syntax</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🤖 LLM Service Issues</h4>
+                    <ul>
+                        <li>API key invalid or missing</li>
+                        <li>Model not supported</li>
+                        <li>Rate limit exceeded</li>
+                        <li>Provider service down</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Environment Setup Script</h3>
+            <div class="code-block">#!/bin/bash
+# Quick setup verification
+
+echo "🔍 Checking OpenCode Environment..."
+
+# Check Node.js
+if command -v node &> /dev/null; then
+  echo "✅ Node.js $(node --version)"
+else
+  echo "❌ Node.js not found"
+fi
+
+# Check services
+services=(
+  "API Gateway:http://localhost:8080/health"
+  "File Service:http://localhost:4001/health"
+  "LLM Service:http://localhost:4002/health"
+)
+
+for service in "${services[@]}"; do
+  name="${service%%:*}"
+  url="${service##*:}"
+  
+  if curl -s "$url" > /dev/null; then
+    echo "✅ $name"
+  else
+    echo "❌ $name"
+  fi
+done</div>
+        </section>
+
+        <div class="footer">
+            <h3>🎉 Ready to Start Coding with AI?</h3>
+            <p>OpenCode Platform combines the power of multiple AI providers with secure, collaborative development tools.</p>
+            <p>
+                <a href="https://github.com/your-org/opencoded-main" target="_blank">GitHub Repository</a> |
+                <a href="https://docs.opencode.dev" target="_blank">Documentation</a> |
+                <a href="https://discord.gg/opencode" target="_blank">Community</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9em; opacity: 0.8;">
+                Built with ❤️ by the OpenCode Team • © 2024 OpenCode Platform
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE = 'http://localhost:8080';
+        let authToken = localStorage.getItem('opencode_token') || '';
+
+        // Utility function to make API calls
+        async function apiCall(endpoint, options = {}) {
+            const url = `${API_BASE}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            if (authToken && !options.skipAuth) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers
+                });
+
+                const data = await response.json();
+                return { success: response.ok, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Display response in a response box
+        function displayResponse(elementId, response) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.textContent = JSON.stringify(response, null, 2);
+        }
+
+        // Authentication functions
+        async function registerUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('Please enter email and password');
+                return;
+            }
+
+            const response = await apiCall('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: email.split('@')[0],
+                    email,
+                    password
+                }),
+                skipAuth: true
+            });
+
+            displayResponse('authResponse', response);
+        }
+
+        async function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('Please enter email and password');
+                return;
+            }
+
+            const response = await apiCall('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                skipAuth: true
+            });
+
+            if (response.success && response.data.data?.token) {
+                authToken = response.data.data.token;
+                localStorage.setItem('opencode_token', authToken);
+                document.getElementById('apiToken').value = authToken;
+                alert('Login successful! Token saved.');
+            }
+
+            displayResponse('authResponse', response);
+        }
+
+        async function getUserProfile() {
+            const response = await apiCall('/api/user/profile');
+            displayResponse('authResponse', response);
+        }
+
+        // File service functions
+        async function createFile() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const path = document.getElementById('filePath').value;
+            const content = document.getElementById('fileContent').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/files/write', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({
+                    path,
+                    content,
+                    createDirectory: true
+                })
+            });
+
+            displayResponse('apiResponse', response);
+        }
+
+        async function readFile() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const path = document.getElementById('filePath').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall(`/api/files/read?path=${encodeURIComponent(path)}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('apiResponse', response);
+        }
+
+        async function listFiles() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const path = document.getElementById('filePath').value.split('/').slice(0, -1).join('/') || '/';
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall(`/api/files?path=${encodeURIComponent(path)}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('apiResponse', response);
+        }
+
+        async function deleteFile() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const path = document.getElementById('filePath').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this file?')) {
+                return;
+            }
+
+            const response = await apiCall(`/api/files?path=${encodeURIComponent(path)}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('apiResponse', response);
+        }
+
+        // Terminal functions
+        async function executeCommand() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const command = document.getElementById('terminalCommand').value;
+            const cwd = document.getElementById('workingDir').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/terminal/execute', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ command, cwd })
+            });
+
+            displayResponse('terminalResponse', response);
+        }
+
+        async function streamCommand() {
+            alert('Streaming commands require WebSocket connection. Use the API directly for full streaming support.');
+        }
+
+        async function getTerminalInfo() {
+            const token = document.getElementById('apiToken').value || authToken;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/terminal/info', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('terminalResponse', response);
+        }
+
+        // Search functions
+        async function searchContent() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const pattern = document.getElementById('searchPattern').value;
+            const path = document.getElementById('searchPath').value;
+            const include = document.getElementById('includePattern').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            let url = `/api/search/content/${encodeURIComponent(pattern)}/${encodeURIComponent(path)}`;
+            if (include) {
+                url += `?includePattern=${encodeURIComponent(include)}`;
+            }
+
+            const response = await apiCall(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('searchResponse', response);
+        }
+
+        async function searchFiles() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const pattern = document.getElementById('searchPattern').value;
+            const path = document.getElementById('searchPath').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall(`/api/search/files/${encodeURIComponent(pattern)}/${encodeURIComponent(path)}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('searchResponse', response);
+        }
+
+        // LLM functions
+        async function configureLLM() {
+            const token = document.getElementById('apiToken').value || authToken;
+            const provider = document.getElementById('llmProvider').value;
+            const model = document.getElementById('llmModel').value;
+            const apiKey = document.getElementById('llmApiKey').value;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/llm/configure', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ provider, model, apiKey })
+            });
+
+            displayResponse('llmResponse', response);
+        }
+
+        async function getProviders() {
+            const token = document.getElementById('apiToken').value || authToken;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/llm/providers', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('llmResponse', response);
+        }
+
+        async function getModels() {
+            const token = document.getElementById('apiToken').value || authToken;
+
+            if (!token) {
+                alert('Please enter API token or login first');
+                return;
+            }
+
+            const response = await apiCall('/api/llm/models', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            displayResponse('llmResponse', response);
+        }
+
+        // Health check function
+        async function checkHealth() {
+            const services = [
+                { name: 'API Gateway', url: `${API_BASE}/health` },
+                { name: 'File Service', url: 'http://localhost:4001/health' },
+                { name: 'LLM Service', url: 'http://localhost:4002/health' },
+                { name: 'Auth Service', url: 'http://localhost:4003/health' },
+                { name: 'Collaboration Service', url: 'http://localhost:4004/health' }
+            ];
+
+            const results = { services: [] };
+
+            for (const service of services) {
+                try {
+                    const response = await fetch(service.url);
+                    const data = await response.json();
+                    results.services.push({
+                        name: service.name,
+                        status: response.ok ? 'UP' : 'DOWN',
+                        url: service.url,
+                        response: data
+                    });
+                } catch (error) {
+                    results.services.push({
+                        name: service.name,
+                        status: 'DOWN',
+                        url: service.url,
+                        error: error.message
+                    });
+                }
+            }
+
+            displayResponse('healthResponse', results);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-fill token if available
+            if (authToken) {
+                document.getElementById('apiToken').value = authToken;
+            }
+
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

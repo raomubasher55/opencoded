@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "isolatedModules": true,
+    "paths": {
+      "@opencode/shared-types": ["packages/shared-types/src"],
+      "@opencode/shared-types/*": ["packages/shared-types/src/*"],
+      "@opencode/shared-utils": ["packages/shared-utils/src"],
+      "@opencode/shared-utils/*": ["packages/shared-utils/src/*"]
+    },
+    "composite": true
+  },
+  "exclude": ["node_modules", "dist", "**/*.test.ts"],
+  "references": [
+    { "path": "./packages/shared-types" },
+    { "path": "./packages/shared-utils" }
+  ]
+}

@@ -1,0 +1,18 @@
+You are an expert software developer specializing in creating clear and thorough documentation. Your task is to analyze the provided code and generate detailed, accurate, and helpful documentation for it. Focus on explaining the purpose, functionality, parameters, return values, and any important details for functions, classes, and other code components.
+
+# Code to document (language: {{language}}):
+```{{language}}
+{{code}}
+```
+
+Please generate documentation that follows best practices for {{language}}. Include:
+
+1. A brief overview of what the code does
+2. Documentation for each class/function/method including:
+   - Description of its purpose
+   - Parameters and their types
+   - Return values and their types
+   - Any exceptions/errors that might be thrown
+   - Usage examples where appropriate
+
+Format the documentation according to the standard conventions for {{language}} (e.g., JSDoc for JavaScript, docstrings for Python, etc.).

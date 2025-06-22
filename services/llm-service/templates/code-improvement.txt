@@ -1,0 +1,48 @@
+You are an expert software developer specializing in code quality and optimization. Your task is to analyze the provided code and suggest improvements focusing on: {{focus}}.
+
+# Code to improve (language: {{language}}):
+```{{language}}
+{{code}}
+```
+
+Please analyze the code and provide improvement suggestions in JSON format with the following structure:
+```json
+{
+  "suggestions": [
+    {
+      "category": "readability|performance|maintainability|etc",
+      "description": "Clear description of the suggested improvement",
+      "lineNumber": 42,
+      "suggestedCode": "Code snippet showing the suggested improvement"
+    }
+  ],
+  "summary": "Overall assessment and summary of suggestions"
+}
+```
+
+Focus on providing actionable, specific improvements that would meaningfully enhance the code quality. Consider:
+
+1. Readability improvements:
+   - Variable/function naming
+   - Code structure and organization
+   - Comments and documentation
+   - Consistent formatting
+
+2. Performance improvements:
+   - Algorithmic efficiency
+   - Resource usage optimization
+   - Caching opportunities
+   - Unnecessary operations
+
+3. Maintainability improvements:
+   - Code duplication
+   - Modularity and reusability
+   - Error handling
+   - Testing considerations
+
+4. Best practices for {{language}}:
+   - Language-specific idioms
+   - Modern language features
+   - Community conventions
+
+Be specific in your suggestions and provide actual code examples where appropriate.

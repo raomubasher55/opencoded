@@ -1,0 +1,150 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./services/api-gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+    volumes:
+      - ./services/api-gateway:/app/services/api-gateway
+      - ./packages:/app/packages
+    depends_on:
+      - auth-service
+      - file-service
+      - collaboration-service
+    networks:
+      - opencode-network
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: ./services/auth-service/Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - PORT=3003
+      - JWT_SECRET=dev_secret_change_in_production
+      - MONGODB_URI=mongodb://mongodb:27017/opencode-auth
+    volumes:
+      - ./services/auth-service:/app/services/auth-service
+      - ./packages:/app/packages
+    depends_on:
+      - mongodb
+    networks:
+      - opencode-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - opencode-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - opencode-network
+      
+  file-service:
+    build:
+      context: .
+      dockerfile: ./services/file-service/Dockerfile
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=development
+      - PORT=4001
+      - JWT_SECRET=dev_secret_change_in_production
+      - ALLOWED_FILE_PATHS=/app/workspace
+    volumes:
+      - ./services/file-service:/app/services/file-service
+      - ./packages:/app/packages
+      - ./workspace:/app/workspace
+    networks:
+      - opencode-network
+      
+  collaboration-service:
+    build:
+      context: .
+      dockerfile: ./services/collaboration-service/Dockerfile
+    ports:
+      - "4005:4005"
+    environment:
+      - NODE_ENV=development
+      - PORT=4005
+      - JWT_SECRET=dev_secret_change_in_production
+      - MONGODB_URI=mongodb://mongodb:27017/opencode-collaboration
+      - REDIS_URI=redis://redis:6379
+      - FILE_SERVICE_URL=http://file-service:4001
+      - AUTH_SERVICE_URL=http://auth-service:3003
+    volumes:
+      - ./services/collaboration-service:/app/services/collaboration-service
+      - ./packages:/app/packages
+    depends_on:
+      - mongodb
+      - redis
+      - file-service
+    networks:
+      - opencode-network
+      
+  session-service:
+    build:
+      context: .
+      dockerfile: ./services/session-service/Dockerfile
+    ports:
+      - "4003:4003"
+    environment:
+      - NODE_ENV=development
+      - PORT=4003
+      - JWT_SECRET=dev_secret_change_in_production
+      - MONGODB_URI=mongodb://mongodb:27017/opencode-session
+    volumes:
+      - ./services/session-service:/app/services/session-service
+      - ./packages:/app/packages
+    depends_on:
+      - mongodb
+    networks:
+      - opencode-network
+      
+  tools-service:
+    build:
+      context: .
+      dockerfile: ./services/tools-service/Dockerfile
+    ports:
+      - "4004:4004"
+    environment:
+      - NODE_ENV=development
+      - PORT=4004
+      - JWT_SECRET=dev_secret_change_in_production
+      - MONGODB_URI=mongodb://mongodb:27017/opencode-tools
+      - EXECUTION_TIMEOUT=30000
+      - MAX_MEMORY_USAGE=512
+      - CACHE_ENABLED=true
+      - CACHE_TTL=3600
+    volumes:
+      - ./services/tools-service:/app/services/tools-service
+      - ./packages:/app/packages
+    depends_on:
+      - mongodb
+    networks:
+      - opencode-network
+
+networks:
+  opencode-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:
